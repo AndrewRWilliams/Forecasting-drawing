@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Drawing App with Data Collection</title>
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        canvas {
+            border: 1px solid black;
+            cursor: crosshair;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="drawingCanvas" width="600" height="400"></canvas>
+
+    <script>
+        const canvas = document.getElementById('drawingCanvas');
+        const ctx = canvas.getContext('2d');
+        let drawing = false;
+        let drawData = []; // Array to store drawing coordinates
+
+        canvas.addEventListener('mousedown', startDrawing);
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('mouseup', stopDrawing);
+        canvas.addEventListener('mouseout', stopDrawing);
+
+        function startDrawing(e) {
+            drawing = true;
+            ctx.beginPath();
+            const { x, y } = getMousePos(e);
+            ctx.moveTo(x, y);
+            // Start collecting data
+            drawData.push({ x, y, drawing: true });
+        }
+
+        function draw(e) {
+            if (!drawing) return;
+            const { x, y } = getMousePos(e);
+            ctx.lineTo(x, y);
+            ctx.strokeStyle = '#000';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            // Collect drawing data
+            drawData.push({ x, y, drawing: true });
+        }
+
+        function stopDrawing() {
+            if (!drawing) return;
+            drawing = false;
+            ctx.closePath();
+            // Indicate the end of drawing
+            drawData.push({ drawing: false });
+            // Log the collected data
+            console.log(drawData);
+        }
+
+        function getMousePos(e) {
+            return {
+                x: e.clientX - canvas.offsetLeft,
+                y: e.clientY - canvas.offsetTop
+            };
+        }
+    </script>
+</body>
+
+</html>

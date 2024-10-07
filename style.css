@@ -1,0 +1,68 @@
+body,
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#container {
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    padding: 0;
+    /* Ensure no gap between the two canvases */
+}
+
+canvas {
+    cursor: crosshair;
+    margin: 0;
+    /* Ensure no margin between canvases */
+    padding: 0;
+    background-color: white;
+    ;
+}
+
+#plotCanvas {
+    width: 400px;
+    height: 400px;
+    border: none;
+    /* Remove border */
+    background-color: white;
+}
+
+#drawingCanvas {
+    width: 600px;
+    height: 400px;
+    border: none;
+    /* Remove border */
+    background-color: #E6FFE6;
+    /* Light green background for drawing */
+}
+
+#xAxisCanvas {
+    margin-top: 0px;
+}
+
+#yAxisCanvas {
+    margin-right: 10px;
+    margin-bottom: 0px;
+    /* Add space between the y-axis and plot */
+}
+
+/* #submitBtn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+} */
+
+#submitBtn:hover {
+    background-color: #0056b3;
+}
